@@ -24,7 +24,7 @@ export default function Layout() {
                         )}
                     </div>
 
-                    <div className="flex justify-around md:flex-col md:space-y-2 flex-1">
+                    <div className="flex justify-around md:flex-col md:justify-start md:space-y-2 flex-1">
                         {navItems.map((item) => {
                             const Icon = item.icon
                             const isActive = location.pathname === item.path
