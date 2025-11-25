@@ -12,8 +12,8 @@ export default function TaskCard({ task, onToggle, onDelete, onEdit }) {
             exit={{ opacity: 0, scale: 0.95 }}
             whileHover={{ y: -4, shadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)' }}
             className={clsx(
-                "group relative bg-white p-5 rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 cursor-pointer overflow-hidden",
-                task.is_completed && "bg-gray-50"
+                "group relative bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm transition-all duration-300 cursor-pointer overflow-hidden",
+                task.is_completed && "bg-gray-50 dark:bg-gray-800/50"
             )}
             onClick={() => onEdit(task)}
         >
@@ -26,15 +26,15 @@ export default function TaskCard({ task, onToggle, onDelete, onEdit }) {
             <div className="flex items-start justify-between pl-3">
                 <div className="flex-1 min-w-0 mr-4">
                     <h3 className={clsx(
-                        "text-lg font-semibold text-gray-900 mb-1 truncate transition-all duration-300",
-                        task.is_completed && "text-gray-400 line-through"
+                        "text-lg font-semibold text-gray-900 dark:text-white mb-1 truncate transition-all duration-300",
+                        task.is_completed && "text-gray-400 dark:text-gray-500 line-through"
                     )}>
                         {task.title}
                     </h3>
                     {task.description && (
                         <p className={clsx(
-                            "text-sm text-gray-500 line-clamp-2 mb-3",
-                            task.is_completed && "text-gray-300"
+                            "text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-3",
+                            task.is_completed && "text-gray-300 dark:text-gray-600"
                         )}>
                             {task.description}
                         </p>
@@ -43,8 +43,8 @@ export default function TaskCard({ task, onToggle, onDelete, onEdit }) {
                     <div className="flex items-center gap-3 text-xs text-gray-400">
                         {task.due_date && (
                             <div className={clsx(
-                                "flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50",
-                                task.is_completed ? "text-gray-300" : "text-blue-600 bg-blue-50"
+                                "flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50 dark:bg-gray-700",
+                                task.is_completed ? "text-gray-300 dark:text-gray-500" : "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30"
                             )}>
                                 <CalendarIcon className="w-3.5 h-3.5" />
                                 <span>{format(new Date(task.due_date), 'MMM d, h:mm a')}</span>
@@ -60,8 +60,8 @@ export default function TaskCard({ task, onToggle, onDelete, onEdit }) {
                         className={clsx(
                             "p-2 rounded-xl transition-colors",
                             task.is_completed
-                                ? "bg-yellow-50 text-yellow-600 hover:bg-yellow-100"
-                                : "bg-green-50 text-green-600 hover:bg-green-100"
+                                ? "bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-100 dark:hover:bg-yellow-900/40"
+                                : "bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/40"
                         )}
                     >
                         <Check className="w-5 h-5" />
@@ -69,7 +69,7 @@ export default function TaskCard({ task, onToggle, onDelete, onEdit }) {
                     <motion.button
                         whileTap={{ scale: 0.9 }}
                         onClick={() => onDelete(task.id)}
-                        className="p-2 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                        className="p-2 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
                     >
                         <Trash2 className="w-5 h-5" />
                     </motion.button>

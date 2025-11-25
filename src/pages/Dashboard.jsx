@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Plus } from 'lucide-react'
+import { Plus, Search } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
@@ -11,6 +11,7 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true)
     const [isFormOpen, setIsFormOpen] = useState(false)
     const [editingTask, setEditingTask] = useState(null)
+    const [searchQuery, setSearchQuery] = useState('')
     const { user } = useAuth()
 
     useEffect(() => {
@@ -111,12 +112,17 @@ export default function Dashboard() {
         setEditingTask(null)
     }
 
+    const filteredTasks = tasks.filter(task =>
+        task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        task.description?.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+
     return (
         <div className="max-w-5xl mx-auto">
             <div className="flex justify-between items-center mb-8">
                 <div>
-                    <h1 className="text-4xl font-bold text-gray-900 mb-2">My Tasks</h1>
-                    <p className="text-gray-500">
+                    <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">My Tasks</h1>
+                    <p className="text-gray-500 dark:text-gray-400">
                         {loading
                             ? 'Loading...'
                             : `You have ${tasks.filter(t => !t.is_completed).length} pending tasks`
@@ -135,6 +141,17 @@ export default function Dashboard() {
                 </motion.button>
             </div>
 
+            <div className="relative mb-8">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                    type="text"
+                    placeholder="Search tasks..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                />
+            </div>
+
             {loading ? (
                 <div className="flex justify-center py-20">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -142,7 +159,7 @@ export default function Dashboard() {
             ) : (
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <AnimatePresence mode="popLayout">
-                        {tasks.map((task) => (
+                        {filteredTasks.map((task) => (
                             <TaskCard
                                 key={task.id}
                                 task={task}
@@ -153,9 +170,11 @@ export default function Dashboard() {
                         ))}
                     </AnimatePresence>
 
-                    {tasks.length === 0 && (
-                        <div className="col-span-full text-center py-20 bg-white rounded-3xl border border-dashed border-gray-200">
-                            <p className="text-gray-400 text-lg">No tasks yet. Create one to get started!</p>
+                    {filteredTasks.length === 0 && (
+                        <div className="col-span-full text-center py-20 bg-white dark:bg-gray-800 rounded-3xl border border-dashed border-gray-200 dark:border-gray-700">
+                            <p className="text-gray-400 text-lg">
+                                {searchQuery ? 'No tasks found matching your search.' : 'No tasks yet. Create one to get started!'}
+                            </p>
                         </div>
                     )}
                 </div>

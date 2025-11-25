@@ -60,16 +60,16 @@ export default function TaskForm({ isOpen, onClose, onSubmit, initialData = null
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
                     >
-                        <div className="bg-white w-full max-w-md p-6 rounded-3xl shadow-2xl pointer-events-auto mx-4">
+                        <div className="bg-white dark:bg-gray-800 w-full max-w-md p-6 rounded-3xl shadow-2xl pointer-events-auto mx-4">
                             <div className="flex justify-between items-center mb-6">
-                                <h2 className="text-2xl font-bold text-gray-900">
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                                     {initialData ? 'Edit Task' : 'New Task'}
                                 </h2>
                                 <button
                                     onClick={onClose}
                                     className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                                 >
-                                    <X className="w-5 h-5 text-gray-500" />
+                                    <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                                 </button>
                             </div>
 
@@ -80,7 +80,7 @@ export default function TaskForm({ isOpen, onClose, onSubmit, initialData = null
                                         placeholder="What needs to be done?"
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        className="w-full text-lg font-medium placeholder:text-gray-400 border-0 border-b-2 border-gray-100 focus:border-blue-500 focus:ring-0 px-0 py-2 transition-colors bg-transparent"
+                                        className="w-full text-lg font-medium placeholder:text-gray-400 dark:placeholder:text-gray-500 border-0 border-b-2 border-gray-100 dark:border-gray-700 focus:border-blue-500 focus:ring-0 px-0 py-2 transition-colors bg-transparent text-gray-900 dark:text-white"
                                         required
                                         autoFocus
                                     />
@@ -91,7 +91,7 @@ export default function TaskForm({ isOpen, onClose, onSubmit, initialData = null
                                         placeholder="Add details..."
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
-                                        className="w-full text-sm text-gray-600 placeholder:text-gray-400 border-0 bg-gray-50 rounded-xl p-3 focus:ring-2 focus:ring-blue-100 transition-all resize-none"
+                                        className="w-full text-sm text-gray-600 dark:text-gray-300 placeholder:text-gray-400 dark:placeholder:text-gray-500 border-0 bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all resize-none"
                                         rows={3}
                                     />
                                 </div>
@@ -105,7 +105,7 @@ export default function TaskForm({ isOpen, onClose, onSubmit, initialData = null
                                             type="date"
                                             value={dueDate}
                                             onChange={(e) => setDueDate(e.target.value)}
-                                            className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border-0 rounded-xl text-sm text-gray-600 focus:ring-2 focus:ring-blue-100 transition-all"
+                                            className="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-700/50 border-0 rounded-xl text-sm text-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all"
                                         />
                                     </div>
                                     <div className="flex-1 relative">
@@ -116,7 +116,7 @@ export default function TaskForm({ isOpen, onClose, onSubmit, initialData = null
                                             type="time"
                                             value={dueTime}
                                             onChange={(e) => setDueTime(e.target.value)}
-                                            className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border-0 rounded-xl text-sm text-gray-600 focus:ring-2 focus:ring-blue-100 transition-all"
+                                            className="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-700/50 border-0 rounded-xl text-sm text-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all"
                                         />
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@ export default function TaskForm({ isOpen, onClose, onSubmit, initialData = null
                                     <button
                                         type="button"
                                         onClick={onClose}
-                                        className="px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 rounded-xl transition-colors"
+                                        className="px-5 py-2.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors"
                                     >
                                         Cancel
                                     </button>

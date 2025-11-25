@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { ThemeProvider } from './context/ThemeContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
@@ -12,20 +13,22 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+        <ThemeProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
 
-          <Route path="/" element={
-            <ProtectedRoute>
-              <Layout />
-            </ProtectedRoute>
-          }>
-            <Route index element={<Dashboard />} />
-            <Route path="calendar" element={<CalendarPage />} />
-            <Route path="stopwatch" element={<StopwatchPage />} />
-          </Route>
-        </Routes>
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Layout />
+              </ProtectedRoute>
+            }>
+              <Route index element={<Dashboard />} />
+              <Route path="calendar" element={<CalendarPage />} />
+              <Route path="stopwatch" element={<StopwatchPage />} />
+            </Route>
+          </Routes>
+        </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>
   )
